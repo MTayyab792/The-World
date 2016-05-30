@@ -22,7 +22,7 @@ input[type=submit]{
 }
 
 #main{
-    background-color:papayawhip;
+    background-color:blueviolet;
     padding:4px;
     margin:0;
 }
@@ -46,6 +46,10 @@ padding:3px;
 }
 .menu li .active{
     font-weight:bold;
+}
+
+.menu li a{
+    color:blueviolet;
 }
 #sidebar{
     background:#ffd800;
