@@ -1,4 +1,5 @@
-﻿
+﻿    // site javascript
+
 //function startup() {
 //    var ele = document.getElementById("username");
 //    ele.innerHTML = "web Develpoer";
@@ -16,24 +17,41 @@
 //};
 //startup();
 
+
+        // site jquery
+
 (function() {
-    var ele = $("#username");
-    ele.text("web Developer");
-    var main = $("#main");
-    main.on("mouseenter", function () {
+//    var ele = $("#username");
+//    ele.text("web Developer");
+//    var main = $("#main");
+//    main.on("mouseenter", function () {
 
-        main.style="background-color:black;";
-    });
-    main.on("mouseleave", function () {
+//        main.style="background-color:black;";
+//    });
+//    main.on("mouseleave", function () {
 
-        main.style ="";
+//        main.style ="";
 
-    });
+//    });
 
-    var menuitem = $("ul.menu li a");
-    menuitem.on("click", function () {
+//    var menuitem = $("ul.menu li a");
+//    menuitem.on("click", function () {
 
-        alert("Hello")
-    })
+//        alert("Hello")
+//    })
+
+
+var $sidebarAndWrapper = $("#sidebar, #wrapper");
+$("#sidebarToggle").on("click", function(){
+
+    $sidebarAndWrapper.toggleClass("hide-sidebar");
+    if ($sidebarAndWrapper.hasClass("hide-sidebar")) {
+        $(this).text("Show Sidebar");
+    }
+    else {
+
+        $(this).text("Hide Sidebar");
+    }
+});
 
 })();
