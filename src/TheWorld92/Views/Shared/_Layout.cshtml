@@ -3,25 +3,22 @@
     ViewBag.Title = "Home Page";
 }
 
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <title>The World -@ViewBag.Title</title>
 
-    <link href="css/site.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
     <div id="sidebar">
-        <img src="img/tay.png" alt="Tayyab g" class="headshot" />
+        <img src="~/img/tay.png" alt="Tayyab g" class="headshot" />
         <span id="username">Tayyab G </span>
         <ul class="menu">
             <li class="active"><a asp-controller ="App" asp-action="Index">Home</a></li>
-            <li class="active"><a asp-controller ="App" asp-action="About">About</a></li>
-            <li class="active"><a asp-controller ="App" asp-action="Contact">Contact</a></liclass="active">
+            <li><a asp-controller ="App" asp-action="About">About</a></li>
+            <li><a asp-controller ="App" asp-action="Contact">Contact</a></li>
         </ul>
 
     </div>
@@ -40,8 +37,8 @@
 
         </div>
     </div>
-    <script src="lib/jquery/dist/jquery.min.js"></script>
-    <script src="js/site.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js"></script>
 
 
 </body>
