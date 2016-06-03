@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>The World -@ViewBag.Title</title>
+
+    <link href="css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="sidebar">
+        <img src="img/tay.png" alt="Tayyab g" class="headshot" />
+        <span id="username">Tayyab G </span>
+        <ul class="menu">
+            <li class="active"><a asp-controller ="App" asp-action="Index">Home</a></li>
+            <li class="active"><a asp-controller ="App" asp-action="About">About</a></li>
+            <li class="active"><a asp-controller ="App" asp-action="Contact">Contact</a></liclass="active">
+        </ul>
+
+    </div>
+
+
+
+    <div id="wrapper">
+        <div id="main">
+            <div>
+                <button id="sidebarToggle">Toggle menu </button>
+            </div>
+           @RenderBody()
+        </div>
+        <div id="footer">
+            &copy; 2015 The world Ltd.
+
+        </div>
+    </div>
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="js/site.js"></script>
+
+
+</body>
+</html>
