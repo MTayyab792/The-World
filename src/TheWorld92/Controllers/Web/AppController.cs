@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using TheWorld92.ViewModels;
 using TheWorld92.Services;
+using TheWorld92.Models;
+
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,13 +15,17 @@ namespace TheWorld92.Controllers.Web
     public class AppController : Controller
     {
         private IMailService _mailService;
-        public AppController(IMailService service)
+        private IWorldRepository _respository;
+
+        public AppController(IMailService service, IWorldRepository repository)
         {
             _mailService = service;
+            _respository = repository;
         }
         public IActionResult Index()
         {
-            return View();
+            var trips = _respository.GetAllTrips();
+            return View(trips);
         }
         public IActionResult About()
         {

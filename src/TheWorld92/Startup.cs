@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using TheWorld92.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
+using TheWorld92.Models;
+using Microsoft.Extensions.Logging;
 
 namespace TheWorld92
 {
@@ -29,6 +31,16 @@ namespace TheWorld92
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddLogging();
+
+            services.AddEntityFramework().AddSqlServer().AddDbContext<WorldContext>();
+
+            services.AddTransient<WorldContextSeedData>();
+
+          services.AddScoped<IWorldRepository, WorldRepository>();
+
+
 #if DEBUG
             services.AddScoped<IMailService, DebugMailService>();
 #else
@@ -37,9 +49,11 @@ namespace TheWorld92
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, WorldContextSeedData seedar, ILoggerFactory loggerFactory)
         {
-          // app.UseDefaultFiles();
+            // app.UseDefaultFiles();
+
+            loggerFactory.AddDebug(LogLevel.Warning);
             app.UseStaticFiles();
             app.UseMvc(config =>
             {
@@ -50,6 +64,8 @@ namespace TheWorld92
 
                     );
             });
+
+            seedar.EnsureSeedData();
           
         }
 

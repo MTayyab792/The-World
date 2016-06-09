@@ -2,6 +2,7 @@
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
+@model IEnumerable<TheWorld92.Models.Trip>
 @{
     ViewBag.Title = "Home Page";
 
@@ -32,6 +33,13 @@
     </div>
     <div class="col-md-6">
         <h4>The Map</h4>
+        <ul>
+            @foreach(var trip in Model)
+            {
+                <li>@trip.Name (@trip.Created.ToShortDateString())</li>
+
+            }
+        </ul>
 
     </div>
 </div>  
