@@ -11,6 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
 using TheWorld92.Models;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
+using AutoMapper;
+using TheWorld92.ViewModels;
 
 namespace TheWorld92
 {
@@ -30,15 +33,20 @@ namespace TheWorld92
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(opt =>
+            {
+                opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
 
             services.AddLogging();
 
             services.AddEntityFramework().AddSqlServer().AddDbContext<WorldContext>();
 
+            services.AddScoped<CoordService>();
+
             services.AddTransient<WorldContextSeedData>();
 
-          services.AddScoped<IWorldRepository, WorldRepository>();
+            services.AddScoped<IWorldRepository, WorldRepository>();
 
 
 #if DEBUG
@@ -55,6 +63,14 @@ namespace TheWorld92
 
             loggerFactory.AddDebug(LogLevel.Warning);
             app.UseStaticFiles();
+
+            Mapper.Initialize(config =>
+            { 
+            config.CreateMap<Trip, TripViewModel>().ReverseMap();
+            config.CreateMap<Stop, StopViewModel>().ReverseMap();
+
+            });
+
             app.UseMvc(config =>
             {
                 config.MapRoute(

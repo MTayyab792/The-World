@@ -1,6 +1,7 @@
 ﻿{
   "AppSettings": {
-    "SiteEmailAddress": "mtayyab@aol.com"
+    "SiteEmailAddress": "mtayyab@aol.com",
+    "BingKey":  "DONTHARDCODEKEYSINCONFIGURATION"
   },
 
   "Data": {
