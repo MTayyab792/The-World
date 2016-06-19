@@ -6,6 +6,7 @@ using Microsoft.AspNet.Mvc;
 using TheWorld92.ViewModels;
 using TheWorld92.Services;
 using TheWorld92.Models;
+using Microsoft.AspNet.Authorization;
 
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -23,6 +24,12 @@ namespace TheWorld92.Controllers.Web
             _respository = repository;
         }
         public IActionResult Index()
+        {
+           
+            return View();
+        }
+        [Authorize]
+        public IActionResult Trips()
         {
             var trips = _respository.GetAllTrips();
             return View(trips);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,13 +9,28 @@ namespace TheWorld92.Models
     public class WorldContextSeedData
     {
         private WorldContext _context;
+        private UserManager<WorldUser> _userManager;
 
-        public WorldContextSeedData(WorldContext context)
+        public WorldContextSeedData(WorldContext context, UserManager<WorldUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
-        public void EnsureSeedData()
+        public async Task EnsureSeedDataAsync()
         {
+            if(await _userManager.FindByEmailAsync("mtayyab@theworld.com") == null)
+            {
+                //Add the user.
+                var newUser = new WorldUser()
+                {
+                    UserName = "mtayyab",
+                    Email = "mtayyab@theworld.com"
+                };
+
+              await  _userManager.CreateAsync(newUser, "P@ssw0rd!");
+            }
+
+
             if (!_context.Trips.Any())
             {
                 // Add new Data
@@ -22,7 +38,7 @@ namespace TheWorld92.Models
                 {
                     Name = "PK Trip",
                     Created = DateTime.UtcNow,
-                    UserName = "",
+                    UserName = "mtayyab",
                     Stops = new List<Stop>()
                     {
                          new Stop() { Name= "Lahore, Pakistan", Arrival= new DateTime(2016,8,1), Latitude=31.582045, Longitude=74.329376, Order=0},
@@ -43,7 +59,7 @@ namespace TheWorld92.Models
                 {
                     Name = "World Trip",
                     Created = DateTime.UtcNow,
-                    UserName = "",
+                    UserName = "mtayyab",
                     Stops = new List<Stop>()
                     {
                         new Stop()  { Name= "Pakistan", Arrival= new DateTime(2016,09,1), Latitude=30.3753, Longitude=69.3451, Order=0},
