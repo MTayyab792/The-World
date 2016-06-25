@@ -2,79 +2,28 @@
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
-@model IEnumerable<TheWorld92.Models.Trip>
+
 @{
     ViewBag.Title = "Home Page";
 
 }
 @section Scripts{
+<script src="~/lib/underscore/underscore-min.js"></script>
 <script src="~/lib/angular/angular.min.js"></script>
+<script src="~/lib/angular-route/angular-route.min.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
+        type="text/javascript"></script>
+@*<script src="http://maps.google.com/maps/api/js?sensor=true"></script>*@
+<script src="~/lib/travelmap/travelmap.min.js"></script>
+<script src="~/lib/gmaps/gmaps.min.js"></script>
 <script src="~/js/app-trips.js"></script>
 <script src="~/js/tripscontroller.js"></script>
 <script src="~/js/simplecontrols.js"></script>
+<script src="~/js/tripeditorcontroller.js"></script>
 }
 <div class="row" ng-app="app-trips">
-    <div ng-controller="tripsController as vm" class="col-md-6 col-md-offset-3">
-    <div class="text-danger" ng-show="vm.errorMessage">{{vm.errorMessage}}</div>
-     @*  <div ng-show="vm.isBusy" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loding...</div>*@
-        
-        <wait-cursor display-when="vm.isBusy"></wait-cursor> 
-        <table class="table table-responsive table-striped">
-           <tr ng-repeat="trip in vm.trips">
-              <td>{{trip.name}}</td>
-             <td>{{trip.created | date: 'MM-dd-yyyy'}}</td>
-               <td><a href="#" class="btn btn-sm btn-primary">Manage</a></td>
-           </tr>
-        </table>
-
-        <form novalidate name="newTripForm" ng-submit="vm.addTrip()">
-            <div class="form-group">
-                <label for="name">Trip Name</label>
-                <input class="form-control" type="text" id="name" name="name" ng-model="vm.newTrip.name" required ng-minlength="5" />
-                <span ng-show="newTripForm.name.$error.required" class="text-warning">Name is required.</span>
-                <span ng-show="newTripForm.name.$error.minlength" class="text-warning">Name must be at least five characters.</span>
-                 
-            </div>
-            <div class="form-group">
-                <input type="submit"value="Add" class="btn btn-success btn-sm" ng-disabled="newTripForm.$invalid" />
-
-            </div>
-
-        </form>
+    <div ng-view>
 
     </div>
 
-    <div class="col-md-6">
-        <h1>Hello World</h1>
-        <p>This will be a fun  website soon!</p>
-
-
-        <form>
-            <div>
-                <label class="form-group">Date</label>
-                <input class="form-control" />
-            </div>
-            <div>
-
-                <label class="form-group">Location</label>
-                <input class="form-control"/>
-            </div>
-            <div>
-                <br />
-                <input type="submit" value="Add" class="btn btn-success "/>
-            </div>
-
-        </form>
-    </div>
-    <div class="col-md-6">
-        <h4>The Map</h4>
-        <ul>
-            @foreach(var trip in Model)
-            {
-                <li>@trip.Name (@trip.Created.ToShortDateString())</li>
-
-            }
-        </ul>
-
-    </div>
 </div>  
