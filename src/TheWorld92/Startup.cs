@@ -93,11 +93,28 @@ namespace TheWorld92
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure(IApplicationBuilder app, WorldContextSeedData seedar, ILoggerFactory loggerFactory)
+        public async void Configure(IApplicationBuilder app, 
+            WorldContextSeedData seedar, 
+            ILoggerFactory loggerFactory,
+            IHostingEnvironment env)
         {
+
+            if (env.IsDevelopment())
+            {
+                loggerFactory.AddDebug(LogLevel.Information);
+                app.UseDeveloperExceptionPage();
+
+            }
+            else
+            {
+                loggerFactory.AddDebug(LogLevel.Error);
+                app.UseExceptionHandler("/App/Error");
+
+            }
+
+
             // app.UseDefaultFiles();
 
-            loggerFactory.AddDebug(LogLevel.Warning);
             app.UseStaticFiles();
             app.UseIdentity();
 

@@ -41,6 +41,7 @@
 //    })
 
 
+
     var $sidebarAndWrapper = $("#sidebar, #wrapper");
     var $icon = $("#sidebarToggle i.fa");
 

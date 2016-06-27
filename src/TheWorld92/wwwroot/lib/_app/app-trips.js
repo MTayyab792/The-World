@@ -1,0 +1,1 @@
+!function(){"use strict";angular.module("app-trips",["simpleControls","ngRoute"]).config(["$routeProvider",function(r){r.when("/",{controller:"tripsController",controllerAs:"vm",templateUrl:"/Views/tripsView.html"}),r.when("/editor/:tripName",{controller:"tripEditorController",controllerAs:"vm",templateUrl:"/Views/tripEditorView.html"}),r.otherwise({redirectTo:"/"})}])}();
